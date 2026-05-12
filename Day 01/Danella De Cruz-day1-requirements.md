@@ -74,7 +74,7 @@ Payment data	Payment gateway	never stored on LearnLanka servers.
 2.	Students can search tutors by prices in LKR.
 3.	Students are offered all the standard O/L subjects and A/L subjects.
 4.	Payments are made in LKR to tutor.
-5. Tutors are payed via bank transfer.
+5.  Tutors are payed via bank transfer.
 6.	An external payment gateway was used to handle all payment related tasks.
 7.	SMS was used externally to send OTPs and notify user regarding payment details.
 
@@ -84,4 +84,4 @@ Payment data	Payment gateway	never stored on LearnLanka servers.
 2.	Booking System
 3.	User login systems and profiles
 4.	Connecting external systems such as Payment gateway and SMS to system
-Evaluation Criteria: - Each functional requirement is testable and free of solution bias (5 pts) - Non-functional requirements have measurable targets (no "fast", "secure", "user-friendly" without numbers) (5 pts) - Personas are distinct and have specific goals, not generic descriptions (5 pts) - Assumptions section captures at least 6 silent gaps in the brief (5 pts) - Out-of-scope section names at least 4 things that could be in scope but are not (5 pts)
+
