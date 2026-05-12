@@ -35,7 +35,7 @@ Operations Admin
 Goals
 1. Makesure the interface is simple, easy to use and navigate.
 2. Charge a 15% commission on every completed session.
-3. Pay tutors weekly via bank transfer
+3. Pay tutors weekly via bank transfer.
 
 Frustrations
 1. Dealing with payments if the external payment gateway is down.
@@ -54,7 +54,7 @@ Tutor
 2.	Rate student (1-5 stars) and leave a one-line comment after the session.
 
 Operations Admin
-1.	Charge a 15% commission on every completed session and pay tutors weekly via bank transfer
+1.	Charge a 15% commission on every completed session and pay tutors weekly via bank transfer.
 
 ## 4. Non-Functional Requirements
 - Table with columns: Category, Metric, Target, How we'll measure it
