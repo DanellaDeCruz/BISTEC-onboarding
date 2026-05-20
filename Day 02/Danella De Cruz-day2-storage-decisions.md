@@ -21,3 +21,7 @@
 ## 4. Queue plan
 - Which work goes on a queue and why
 - What happens if the consumer is down for 30 minutes
+
+Code Requirements: - Cache-aside pseudocode block included - A clear answer to "what is the source of truth for each piece of data" - At least one example of when not to cache
+
+Evaluation Criteria: - Every data type has a primary store with reasoning (5 pts) - "Why not the alternative" is specific, not generic (5 pts) - Cache plan names what to cache and TTL with rationale (5 pts) - Queue plan identifies failure mode (consumer down, retry, DLQ) (5 pts) - Decision doc reads as a memo a senior engineer could approve, not as a homework dump (5 pts)

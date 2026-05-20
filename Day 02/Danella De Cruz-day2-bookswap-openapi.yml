@@ -216,7 +216,7 @@ components:
         id:
           type: string
 
-        borrowerId:
+        memberId:
           type: string
 
         status:
