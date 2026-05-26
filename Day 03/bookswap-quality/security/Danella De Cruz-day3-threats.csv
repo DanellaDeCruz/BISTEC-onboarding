@@ -1,0 +1,8 @@
+Category,Question,Finding,Severity,Mitigation Owner
+Authn,Is every non-public endpoint protected by JWT?,Validation errors may leak framework details,L,Backend Team
+Authz,Does every /{id}-shaped endpoint check object ownership?,PATCH /borrow-requests/{requestId} vulnerable to BOLA,H,Backend Team
+Injection,Are all DB queries parameterised?,Search filters could allow SQL injection if concatenated,M,Backend Team
+Secrets,Where are connection strings stored?,Secrets may leak if stored in config files,H,Platform Team
+Transport,Is TLS enforced at Front Door?,HTTP to HTTPS redirect not explicitly enforced,M,Infrastructure Team
+Rate limit,Are auth and write endpoints rate-limited?,Sensitive write endpoints lack throttling,H,Platform Team
+PII,What PII appears in responses logs or queues?,Borrower history leaks borrowerId in BookDetails,M,Backend Team
