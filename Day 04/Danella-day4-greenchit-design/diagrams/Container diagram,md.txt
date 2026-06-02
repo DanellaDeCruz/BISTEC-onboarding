@@ -1,0 +1,52 @@
+Container diagram
+
+flowchart TD
+User[Employee]
+Manager[Line Manager]
+Finance[Finance Officer]
+
+Entra[Microsoft Entra ID]
+
+Web[GreenChit Web Application
+React SPA]
+
+API[GreenChit API
+ASP.NET Core]
+
+SQL[(Azure SQL)]
+
+Blob[(Azure Blob Storage)]
+
+SB[Azure Service Bus]
+
+Notify[Notification Worker]
+
+Teams[Microsoft Teams]
+
+Email[Email Service]
+
+SP[SharePoint Folder]
+
+Payroll[Payroll Automation]
+
+User -->|Uses HTTPS| Web
+Manager -->|Uses HTTPS| Web
+Finance -->|Uses HTTPS| Web
+
+Web -->|OIDC Login| Entra
+Web -->|REST HTTPS JWT| API
+
+API -->|Read/Write TDS| SQL
+API -->|Generate SAS URL| Blob
+API -->|Publish Events AMQP| SB
+
+SB -->|claim.submitted| Notify
+
+Notify -->|Adaptive Card| Teams
+Notify -->|SMTP/API| Email
+
+Finance -->|Export CSV| API
+API -->|Upload CSV| SP
+
+Payroll -->|Read CSV| SP
+  
