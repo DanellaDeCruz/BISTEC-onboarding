@@ -5,7 +5,6 @@ GreenChit is an internal reimbursement management system for BISTEC employees. S
 
 ## 2. Containers (C4 Level 2) — embedded PNG + table of containers
 
-
 | Container           | Technology              | Responsibility                 |
 | ------------------- | ----------------------- | ------------------------------ |
 | GreenChit Web App   | React SPA               | User interface                 |

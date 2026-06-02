@@ -3,30 +3,36 @@ Status
 
 Accepted (date: 2026-07-01)
 
-Context
+## Context
 Team size is approximately 10 engineers.
 Business prefers rapid delivery.
 Availability target is 99.9%.
 Future growth is expected but not immediate.
-Decision
+
+## Decision
 
 We will host GreenChit as a modular monolith on Azure App Service.
 
-Consequences
-Easier
+## Consequences
+
+Easier:
+
 Faster deployment
 Simpler operations
 Lower cost
-Harder
+
+Harder:
+
 Independent scaling is limited
 Service boundaries are less explicit
-Different
-Future microservice extraction may require refactoring
-Alternatives Considered
-Azure Container Apps
 
+Different: 
+
+Future microservice extraction may require refactoring
+
+Alternatives Considered:
+- Azure Container Apps
 Rejected due to higher operational complexity for the current team size.
 
-AKS
-
+- AKS
 Rejected because platform overhead is unjustified.

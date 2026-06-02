@@ -14,7 +14,7 @@
 | Operability (10-person team) | 4      | 4                    | 3                       | Easier troubleshooting                        |
 | Independent Deployments      | 3      | 1                    | 5                       | Microservices excel here                      |
 | Future Scaling               | 4      | 2                    | 5                       | Services can scale independently              |
-| Auth Consistency             | 3      | 4                    | 3                       | Single deployment simplifies auth             |
+| Auth Consistency             | 3      | 2                    | 3                       | Single deployment simplifies auth             |
 | Availability                 | 4      | 4                    | 4                       | Both can meet SLA                             |
 | Audit Compliance             | 5      | 5                    | 5                       | Independent of hosting choice                 |
 
@@ -47,31 +47,14 @@ The scalability advantages of Container Apps do not currently outweigh the busin
 
 ## Design review feedback (received from another pair)
 - 3 strengths
-1. Strong security model using Entra ID.
-2. Clear separation between business logic and storage.
-3. Good notification architecture using asynchronous messaging.
-
 - 3 weaknesses or risks
-1. Service Bus retry policy not documented.
-2. Audit tamper-evidence mechanism needs more detail.
-3. Blob malware scanning workflow not shown.
-
 - 2 actionable improvements
-1. Add retry/dead-letter queue section to ADR-0004.
-2. Extend component diagram with audit hash-chain component.
 
 ## Design review feedback (given to another pair)
 - 3 strengths
-Clear diagram notation.
-Strong use of C4 hierarchy.
-Comprehensive ADR rationale.
 
 - 3 weaknesses or risks
-Missing export scheduling process.
-Teams notification failure handling unclear.
-No documented disaster recovery strategy.
 
 - 2 actionable improvements
-Add SharePoint export sequence diagram.
-Add backup and restore strategy section to ADR-0003.
+
 
