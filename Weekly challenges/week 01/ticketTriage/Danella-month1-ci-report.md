@@ -78,7 +78,35 @@ All API routes (`/api/tickets`, `/api/tickets/[id]`) are dynamic (`ƒ`) as expec
 
 ## Failures and Fixes
 
-Three failures were encountered across the build pipeline. Each is documented with the exact error, root cause, and fix.
+Four failures were encountered across the build pipeline. Each is documented with the exact error, root cause, and fix.
+
+---
+
+### Failure 4 — CI workflow not detected by GitHub Actions (subfolder placement)
+
+**Error message**
+```
+ERROR  packages field missing or empty
+For help, run: pnpm help install
+Error: Process completed with exit code 1.
+```
+
+**Warning** (non-blocking)
+```
+Node.js 20 is deprecated. The following actions target Node.js 20 but are being
+forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4,
+pnpm/action-setup@v4.
+```
+
+**Root cause**
+GitHub Actions only detects workflow files at the repository root (`<repo>/.github/workflows/`). The initial `ci.yml` was placed at `Weekly challenges/week 01/ticketTriage/.github/workflows/ci.yml` — a subfolder — so GitHub showed the "Get started with Actions" page instead of running it. Once moved to the repo root, the `pnpm install` step ran in the wrong directory (the repo root has no `package.json`) because `defaults: run: working-directory` is not respected by `pnpm/action-setup`.
+
+The Node.js 20 deprecation warning is informational only — GitHub forces the action to run on Node.js 24 automatically. It does not cause failures.
+
+**Fix**
+Moved `ci.yml` to the repo root (`.github/workflows/ci.yml`). Replaced the `defaults: run: working-directory` block with explicit `working-directory:` on every individual step, and added `package_json_file:` to `pnpm/action-setup` so pnpm resolves the correct `package.json` in the subfolder before any install runs.
+
+**File changed**: `.github/workflows/ci.yml` (moved to repo root + per-step working-directory)
 
 ---
 
