@@ -49,7 +49,7 @@ describe("GET /api/tickets — integration", () => {
 
     const response = await GET();
     const body = (await response.json()) as Ticket[];
-    expect(body[0].owner).toBeNull();
+    expect(body[0]?.owner).toBeNull();
   });
 
   // T010 — empty DB returns empty array, not an error

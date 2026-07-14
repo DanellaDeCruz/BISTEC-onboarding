@@ -16,6 +16,8 @@ build/
 # database
 prisma/dev.db
 prisma/dev.db-journal
+prisma/prisma/test.db
+prisma/test.db-journal
 
 # misc
 .DS_Store

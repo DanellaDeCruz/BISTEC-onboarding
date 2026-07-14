@@ -1,16 +1,5 @@
 # Context Engineering Journal — Month 1
 
-**Author**: Danella De Cruz  
-**Project**: ticketTriage  
-**Period**: 2026-06-23 → 2026-06-30  
-**Stack**: Next.js 15 · Prisma · SQLite · Vitest
-
----
-
-## Week 3 Deliverables
-
-Three artefacts required by the challenge: API endpoints, named migration, Vitest suite green on CI.
-
 | Artefact | Status | Location |
 |---|---|---|
 | `GET /api/tickets` — returns all tickets ordered by priority | ✅ | `src/app/api/tickets/route.ts` |
@@ -21,19 +10,6 @@ Three artefacts required by the challenge: API endpoints, named migration, Vites
 | Integration tests — 18 passing across 4 files | ✅ | `tests/integration/` |
 | GitHub Actions CI — lint → typecheck → unit → integration → build | ✅ | `.github/workflows/ci.yml` |
 
-### Week 3 Core Concepts Applied
-
-**The task contract — prompt + files + acceptance**: Every speckit command was given a specific acceptance criterion (the tasks.md checkpoints). When a task had no clear AC (e.g. "fix ESLint"), the agent produced a guess at what passing meant — the fix for this was adding an explicit failing test *before* asking for the fix.
-
-**Multi-file edits — planning across files**: The `POST /api/tickets` addition required edits to one file (`route.ts`) and a new test file (`post-ticket.test.ts`). Naming both files in the prompt eliminated the need for the agent to discover the test location.
-
-**Test-driven prompting — failing test → fix → iterate**: The whitespace owner bug (Pair 1 above) was only reproducible because the integration test existed first. The agent was given the exact assertion error, not a description of the problem.
-
-**Database schema from ADR — Prisma migration named after the ADR**: Migration `add_priority_index` maps directly to ADR-001 (priority index required for P0 query performance). The migration name is the ADR slug, making the link traceable in `git log`.
-
-**When not to prompt — the spec was wrong, not the prompt**: The `POST` endpoint was missing from the initial implementation because the spec's API surface table only listed GET and PATCH. Week 3 revealed the gap. The correct fix was to add POST to the spec first, then implement — not to ask the agent to guess the shape of a missing endpoint.
-
----
 
 ## 1. Prompt Strategy
 
@@ -53,19 +29,15 @@ Which files were attached to each speckit command, and why.
 
 Specific failures encountered during the session, with the exact missing context that caused them.
 
-### F-1 · ESM-only plugin in CommonJS Vitest config
-
-`vite-tsconfig-paths` v5 is ESM-only; the existing `vitest.config.ts` loaded it via CommonJS `require()`, causing esbuild to hard-fail before any test ran. The missing context was the package's ESM boundary — its `exports` field in `node_modules/vite-tsconfig-paths/package.json` wasn't consulted before writing the config.
-
 > **Location**: `vitest.config.ts:2` — `import tsconfigPaths from "vite-tsconfig-paths"`
 
-### F-2 · Zod min(1) passes a single space
+### F-1 · Zod min(1) passes a single space
 
 `z.string().min(1)` counts whitespace characters. The owner field accepted `" "` (one space) as valid, contradicting FR-010 ("user-friendly validation") and the spec edge case "What happens if the user attempts to save an owner with only whitespace?" The missing context was the Zod documentation for string transforms — `.trim()` must precede length validators.
 
 > **Location**: `src/app/api/tickets/[id]/route.ts:9` — `owner: z.string().min(1)`
 
-### F-3 · Transitive @types/babel__generator not installed
+### F-2 · Transitive @types/babel__generator not installed
 
 `pnpm build` (Next.js type-check phase) failed with "Cannot find type definition file for 'babel__generator'". The indirect dependency chain `@vitejs/plugin-react → @babel/core → @types/babel__core` requires `@types/babel__generator` which was absent from `node_modules`. The missing context was the full dependency graph; only direct deps in `package.json` were inspected.
 
