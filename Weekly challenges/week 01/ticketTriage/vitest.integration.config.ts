@@ -13,7 +13,7 @@ export default defineConfig({
     include: ["tests/integration/**/*.test.ts"],
     globalSetup: ["tests/integration/global-setup.ts"],
     env: {
-      DATABASE_URL: "file:./prisma/test.db",
+      DATABASE_URL: "file:./test.db",
     },
     pool: "forks",
     poolOptions: {

@@ -6,7 +6,7 @@ export function setup(): void {
     unlinkSync("./prisma/test.db");
   }
   execSync("pnpm exec prisma migrate deploy", {
-    env: { ...process.env, DATABASE_URL: "file:./prisma/test.db" },
+    env: { ...process.env, DATABASE_URL: "file:./test.db" },
     stdio: "pipe",
   });
 }

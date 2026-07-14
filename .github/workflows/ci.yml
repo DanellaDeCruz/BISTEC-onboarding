@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Approve native builds
-        run: pnpm approve-builds --all || true
+      - name: Generate Prisma Client
+        run: pnpm exec prisma generate
 
       - name: Type check
         run: pnpm typecheck
@@ -44,12 +44,12 @@ jobs:
         run: pnpm test
 
       - name: Apply migrations (test DB)
-        run: DATABASE_URL="file:./prisma/test.db" pnpm exec prisma migrate deploy
+        run: DATABASE_URL="file:./test.db" pnpm exec prisma migrate deploy
 
       - name: Integration tests
         run: pnpm test:integration
         env:
-          DATABASE_URL: file:./prisma/test.db
+          DATABASE_URL: file:./test.db
 
   build:
     name: Build
@@ -72,8 +72,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Approve native builds
-        run: pnpm approve-builds --all || true
+      - name: Generate Prisma Client
+        run: pnpm exec prisma generate
 
       - name: Build
         run: pnpm build
