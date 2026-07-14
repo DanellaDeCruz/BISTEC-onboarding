@@ -6,9 +6,8 @@ on:
   pull_request:
     branches: [main]
 
-defaults:
-  run:
-    working-directory: "Weekly challenges/week 01/ticketTriage"
+env:
+  WORKING_DIR: "Weekly challenges/week 01/ticketTriage"
 
 jobs:
   test:
@@ -21,6 +20,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 9
+          package_json_file: "Weekly challenges/week 01/ticketTriage/package.json"
 
       - uses: actions/setup-node@v4
         with:
@@ -29,27 +29,36 @@ jobs:
           cache-dependency-path: "Weekly challenges/week 01/ticketTriage/pnpm-lock.yaml"
 
       - name: Install dependencies
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma Client
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm exec prisma generate
 
       - name: Type check
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm typecheck
 
       - name: Lint
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm lint
 
       - name: Unit tests
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm test
 
       - name: Apply migrations (test DB)
-        run: DATABASE_URL="file:./test.db" pnpm exec prisma migrate deploy
+        working-directory: "Weekly challenges/week 01/ticketTriage"
+        run: pnpm exec prisma migrate deploy
+        env:
+          DATABASE_URL: file:./prisma/test.db
 
       - name: Integration tests
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm test:integration
         env:
-          DATABASE_URL: file:./test.db
+          DATABASE_URL: file:./prisma/test.db
 
   build:
     name: Build
@@ -62,6 +71,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 9
+          package_json_file: "Weekly challenges/week 01/ticketTriage/package.json"
 
       - uses: actions/setup-node@v4
         with:
@@ -70,10 +80,13 @@ jobs:
           cache-dependency-path: "Weekly challenges/week 01/ticketTriage/pnpm-lock.yaml"
 
       - name: Install dependencies
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma Client
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm exec prisma generate
 
       - name: Build
+        working-directory: "Weekly challenges/week 01/ticketTriage"
         run: pnpm build
